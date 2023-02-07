@@ -3,12 +3,22 @@ package com.example.gamemaster;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +26,7 @@ import java.util.ArrayList;
  * Use the {@link FragmentSearchResult#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentSearchResult extends Fragment {
+public class FragmentSearchResult extends Fragment implements Serializable {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,10 +34,12 @@ public class FragmentSearchResult extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private ArrayList<GameData> dataSet;
+    private ArrayList<GameData> dataSetAfterFilter;
     private String mParam1;
     private String mParam2;
-
+    private RecyclerView recycleView;
+    private CustomAdapter addapter;
+    private ArrayList<GameData> recievedDataSet;
     public FragmentSearchResult() {
         // Required empty public constructor
     }
@@ -65,11 +77,56 @@ public class FragmentSearchResult extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
 
-        TextView tv = view.findViewById(R.id.searchedText);
-        tv.setText(getArguments().getString("searchedText"));
+        TextView searchedValue = view.findViewById(R.id.searchedText);
+        searchedValue.setText(getArguments().getString("searchedText"));
+        recievedDataSet=(ArrayList<GameData>)getArguments().getSerializable("arr");
 
+        recycleView = view.findViewById(R.id.my_recycler_view);
+
+
+        recycleView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        recycleView.setItemAnimator(new DefaultItemAnimator());
+
+        dataSetAfterFilter = new ArrayList<GameData>();
+
+        String searchValueStr = searchedValue.getText().toString();
+        String nm="";
+
+        for(GameData gm : recievedDataSet){
+            nm=gm.getName();
+            if(nm.equals(searchValueStr) ){
+                dataSetAfterFilter.add(gm);
+            }
+        }
+
+
+
+        addapter = new CustomAdapter(dataSetAfterFilter);
+        recycleView.setAdapter(addapter);
 
 
         return view;
+    }
+
+    public void readDatabaseByName(String name) {
+        // Read from the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("games").child(name);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                GameData value = dataSnapshot.getValue(GameData.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
     }
 }

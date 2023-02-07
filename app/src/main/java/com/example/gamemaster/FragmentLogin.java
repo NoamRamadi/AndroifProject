@@ -10,6 +10,15 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentLogin#newInstance} factory method to
@@ -29,6 +38,7 @@ public class FragmentLogin extends Fragment {
     EditText searchTxt ;
     Bundle bundle;
     String str;
+    private ArrayList<GameData> dataSet;
     public FragmentLogin() {
         // Required empty public constructor
     }
@@ -65,6 +75,23 @@ public class FragmentLogin extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
+        dataSet = new ArrayList<GameData>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("games");
+        ref.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Get map of users in datasnapshot
+                        collectAllDataFromDB((Map<String,Object>) dataSnapshot.getValue());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
+
+
 
         searchBtn = view.findViewById(R.id.LoggedInPageSearchButton);
         searchTxt = view.findViewById(R.id.LoggedInPageSearchText);
@@ -77,11 +104,48 @@ public class FragmentLogin extends Fragment {
                 str = searchTxt.getText().toString().trim();
                 bundle = new Bundle();
                 bundle.putString("searchedText",str);
+                bundle.putSerializable("arr",dataSet);
+
                 Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentSearchResult,bundle);
+
             }
         });
     return view;
     }
+    private void collectAllDataFromDB(Map<String,Object> users) {
+        int i=0;
 
 
+        //iterate through each user, ignoring their UID
+        for (Map.Entry<String, Object> entry : users.entrySet()){
+
+            //Get user map
+            Map singleUser = (Map) entry.getValue();
+            dataSet.add(new GameData(singleUser.get("name").toString(),singleUser.get("description").toString(),
+                    singleUser.get("genre").toString(),singleUser.get("rate").toString()));
+        }
+        int j = 0 ;
+
+    }
+
+    public void readDatabase(String name) {
+        // Read from the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("games");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                GameData value = dataSnapshot.getValue(GameData.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+    }
 }
