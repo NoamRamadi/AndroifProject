@@ -95,7 +95,8 @@ public class FragmentSearchResult extends Fragment implements Serializable {
 
         for(GameData gm : recievedDataSet){
             nm=gm.getName();
-            if(nm.equals(searchValueStr) ){
+
+            if(nm.contains(searchValueStr) ){
                 dataSetAfterFilter.add(gm);
             }
         }

@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +61,13 @@ public class FragmentSingleGame extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_game, container, false);
+        View view = inflater.inflate(R.layout.fragment_single_game, container, false);
+        TextView heroDetail = view.findViewById(R.id.TextViewChosenHeroDetail);
+
+        //ImageView heroImage = view.findViewById(R.id.imageViewChosenHero);
+
+        heroDetail.setText(getArguments().getString("Name"));
+        //heroImage.setImageResource(getArguments().getInt("Image"));
+        return view;
     }
 }

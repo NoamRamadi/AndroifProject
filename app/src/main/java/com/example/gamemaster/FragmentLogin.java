@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Map;
 
 /**
@@ -38,6 +40,8 @@ public class FragmentLogin extends Fragment {
     EditText searchTxt ;
     Bundle bundle;
     String str;
+    Hashtable<String,Integer> drawableHashTable ;
+    Integer[] drawableArray = {R.drawable.callofduty, R.drawable.gta, R.drawable.leagueoflegend};
     private ArrayList<GameData> dataSet;
     public FragmentLogin() {
         // Required empty public constructor
@@ -76,6 +80,11 @@ public class FragmentLogin extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
         dataSet = new ArrayList<GameData>();
+        drawableHashTable = new Hashtable<String,Integer>();
+        drawableHashTable.put("Call Of Duty",R.drawable.callofduty);
+        drawableHashTable.put("League Of Legend",R.drawable.leagueoflegend);
+        drawableHashTable.put("Grand Theft Auto",R.drawable.gta);
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("games");
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -113,18 +122,18 @@ public class FragmentLogin extends Fragment {
     return view;
     }
     private void collectAllDataFromDB(Map<String,Object> users) {
-        int i=0;
+          //iterate through each user, ignoring their UID
 
-
-        //iterate through each user, ignoring their UID
         for (Map.Entry<String, Object> entry : users.entrySet()){
 
             //Get user map
             Map singleUser = (Map) entry.getValue();
-            dataSet.add(new GameData(singleUser.get("name").toString(),singleUser.get("description").toString(),
-                    singleUser.get("genre").toString(),singleUser.get("rate").toString()));
+            String key = singleUser.get("name").toString();
+            dataSet.add(new GameData(singleUser.get("name").toString(),singleUser.get("company").toString(),
+                    singleUser.get("description").toString(),
+                    singleUser.get("genre").toString(),singleUser.get("rate").toString(),drawableHashTable.get(key)
+                    ));
         }
-        int j = 0 ;
 
     }
 

@@ -12,18 +12,12 @@ import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>  {
 
-    private ArrayList<GameData> dataSet;
-    Bundle bundle = new Bundle();
+    public ArrayList<GameData> dataSet;
+
     public CustomAdapter(ArrayList<GameData> dataSet) {
 
         this.dataSet = dataSet;
@@ -32,9 +26,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder  {
        CardView cardView;
        TextView textViewName;
-       TextView textViewDetail;
+       TextView textViewCompany;
        TextView textViewData;
        ImageView imageViewIcon;
+
 
        public MyViewHolder (View itemView)
        {
@@ -42,11 +37,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
            cardView = (CardView) itemView.findViewById(R.id.card_view);
            textViewName = ( TextView) itemView.findViewById(R.id.textViewName);
-           textViewDetail = ( TextView) itemView.findViewById(R.id.textViewDetail);
-           //imageViewIcon = (ImageView) itemView.findViewById(R.id.imageViewHero);
+           textViewCompany = ( TextView) itemView.findViewById(R.id.textViewCompany);
+           imageViewIcon = (ImageView) itemView.findViewById(R.id.imageViewHero);
+           //textViewData= ()
+
+
 
            //ImageView textName = imageViewIcon.get
-           String textDetail = textViewDetail.getText().toString();
+           String textDetail = textViewCompany.getText().toString();
 
            //Bundle bundle = new Bundle();
            //bundle.putString("Name", textName);
@@ -56,12 +54,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
            cardView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
-                   String clickedItem = textViewName.getText().toString();
-                   String data = "";
-                   Bundle bundle = new Bundle();
 
+                   String check=textViewName.getText().toString();
 
-                   Navigation.findNavController(view).navigate(R.id.action_fragmentSearchResult_to_fragmentSingleGame2);
+                    Bundle bundle = new Bundle();
+
+                  // data=clickedItem.
+
+                    bundle.putString("Name",  check);
+
+                   //bundle.putString("Image",  MyData.drawableArray[i]);
+
+                   Navigation.findNavController(view).navigate(R.id.action_fragmentSearchResult_to_fragmentSingleGame2,bundle);
                }
            });
 
@@ -86,18 +90,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder,  int listPosition) {
 
         TextView textViewName = viewHolder.textViewName;
-        TextView textViewDetail = viewHolder.textViewDetail;
-        TextView textViewData = viewHolder.textViewData;
+        TextView textViewCompany = viewHolder.textViewCompany;
+       // TextView textViewData = viewHolder.textViewData;
         ImageView imageView = viewHolder.imageViewIcon;
         CardView cardView = viewHolder.cardView;
 
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewDetail.setText(dataSet.get(listPosition).getDescription());
-        //imageView.setImageResource(dataSet.get(listPosition).getImage());
+        textViewCompany.setText(dataSet.get(listPosition).getCompany());
+        imageView.setImageResource(dataSet.get(listPosition).getImage());
 
 
 
         
+    }
+
+    public ArrayList<GameData> getDataSet() {
+        return dataSet;
     }
 
     @Override
