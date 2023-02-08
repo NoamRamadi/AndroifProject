@@ -64,10 +64,11 @@ public class FragmentSingleGame extends Fragment {
         View view = inflater.inflate(R.layout.fragment_single_game, container, false);
         TextView heroDetail = view.findViewById(R.id.TextViewChosenHeroDetail);
 
-        //ImageView heroImage = view.findViewById(R.id.imageViewChosenHero);
+        ImageView heroImage = view.findViewById(R.id.imageViewChosenHero);
 
-        heroDetail.setText(getArguments().getString("Name"));
-        //heroImage.setImageResource(getArguments().getInt("Image"));
+       // heroDetail.setText(getArguments().getString("name"));
+        heroDetail.setText(getArguments().getString("description"));
+        heroImage.setImageResource(getArguments().getInt("image"));
         return view;
     }
 }
