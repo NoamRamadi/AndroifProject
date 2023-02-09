@@ -7,19 +7,42 @@
     android:orientation="vertical"
     tools:context=".FragmentLogin">
 
+    <TextView
+        android:id="@+id/LoggedInPageSearchUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:text="TextView" />
+
     <EditText
         android:id="@+id/LoggedInPageSearchText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:ems="10"
-        android:hint="Game/Genre" />
+        android:hint="Search Field" />
 
     <Button
         android:id="@+id/LoggedInPageSearchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
-        android:text="Search" />
+        android:text="Search Name" />
+
+
+    <Button
+        android:id="@+id/LoggedInPageSearchGenreButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:text="Search Genre" />
+
+
+    <Button
+        android:id="@+id/LoggedInPageSearchCompanyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:text="Search Company" />
 
 </LinearLayout>

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -36,7 +35,9 @@ public class FragmentLogin extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Button searchBtn;
+    Button searchBtnName;
+    Button searchBtnGenre;
+    Button searchBtnCompany;
     EditText searchTxt ;
     Bundle bundle;
     String str;
@@ -107,17 +108,48 @@ public class FragmentLogin extends Fragment {
 
 
 
-        searchBtn = view.findViewById(R.id.LoggedInPageSearchButton);
+        searchBtnName = view.findViewById(R.id.LoggedInPageSearchButton);
+        searchBtnGenre = view.findViewById(R.id.LoggedInPageSearchGenreButton);
+        searchBtnCompany = view.findViewById(R.id.LoggedInPageSearchCompanyButton);
         searchTxt = view.findViewById(R.id.LoggedInPageSearchText);
         str="";
 
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        searchBtnName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 str = searchTxt.getText().toString().trim();
                 bundle = new Bundle();
                 bundle.putString("searchedText",str);
+                bundle.putString("searchedFlag","gameName");
+                bundle.putSerializable("arr",dataSet);
+
+                Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentSearchResult,bundle);
+
+            }
+        });
+
+        searchBtnGenre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                str = searchTxt.getText().toString().trim();
+                bundle = new Bundle();
+                bundle.putString("searchedText",str);
+                bundle.putString("searchedFlag","gameGenre");
+                bundle.putSerializable("arr",dataSet);
+
+                Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentSearchResult,bundle);
+
+            }
+        });
+
+        searchBtnCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                str = searchTxt.getText().toString().trim();
+                bundle = new Bundle();
+                bundle.putString("searchedText",str);
+                bundle.putString("searchedFlag","gameCompany");
                 bundle.putSerializable("arr",dataSet);
 
                 Navigation.findNavController(view).navigate(R.id.action_fragmentLogin_to_fragmentSearchResult,bundle);

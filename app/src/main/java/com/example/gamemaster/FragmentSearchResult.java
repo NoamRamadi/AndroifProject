@@ -38,6 +38,7 @@ public class FragmentSearchResult extends Fragment implements Serializable {
     private String mParam1;
     private String mParam2;
     private RecyclerView recycleView;
+    private String recievedSearchMethod;
     private CustomAdapter addapter;
     private ArrayList<GameData> recievedDataSet;
     public FragmentSearchResult() {
@@ -77,8 +78,10 @@ public class FragmentSearchResult extends Fragment implements Serializable {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
 
+
         TextView searchedValue = view.findViewById(R.id.searchedText);
         searchedValue.setText(getArguments().getString("searchedText"));
+        recievedSearchMethod=getArguments().getString("searchedFlag");
         recievedDataSet=(ArrayList<GameData>)getArguments().getSerializable("arr");
 
         recycleView = view.findViewById(R.id.my_recycler_view);
@@ -88,18 +91,42 @@ public class FragmentSearchResult extends Fragment implements Serializable {
 
         recycleView.setItemAnimator(new DefaultItemAnimator());
 
-        dataSetAfterFilter = new ArrayList<GameData>();
+
 
         String searchValueStr = searchedValue.getText().toString();
         String nm="";
+        dataSetAfterFilter = new ArrayList<GameData>();
 
-        for(GameData gm : recievedDataSet){
-            nm=gm.getName().toLowerCase();
+        if(recievedSearchMethod.equals("gameName")){
+            for(GameData gm : recievedDataSet){
+                nm=gm.getName().toLowerCase();
 
-            if(nm.contains(searchValueStr.toLowerCase()) ){
-                dataSetAfterFilter.add(gm);
+                if(nm.contains(searchValueStr.toLowerCase()) ){
+                    dataSetAfterFilter.add(gm);
+                }
             }
         }
+
+        else if(recievedSearchMethod.equals("gameGenre")){
+            for(GameData gm : recievedDataSet){
+                nm=gm.getGenre().toLowerCase();
+
+                if(nm.contains(searchValueStr.toLowerCase()) ){
+                    dataSetAfterFilter.add(gm);
+                }
+            }
+        }
+
+        else if(recievedSearchMethod.equals("gameCompany")){
+            for(GameData gm : recievedDataSet){
+                nm=gm.getCompany().toLowerCase();
+
+                if(nm.contains(searchValueStr.toLowerCase()) ){
+                    dataSetAfterFilter.add(gm);
+                }
+            }
+        }
+
 
 
 

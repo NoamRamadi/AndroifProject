@@ -32,6 +32,10 @@ public class GameData {
         this.name = name;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
