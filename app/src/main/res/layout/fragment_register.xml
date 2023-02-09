@@ -1,61 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A1DCD6"
+    android:background="@drawable/backgroundapp"
     android:orientation="vertical"
     tools:context=".FragmentRegister">
 
-    <EditText
-        android:id="@+id/editTextRegisterEmail"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textSize="34sp" />
+        android:layout_weight="0.8"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editTextRegisterPassword"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textSize="34sp" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/gamemastericon" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextRegisterName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:textSize="34sp" />
+        android:layout_weight="0.4"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextRegisterID"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="ID"
-        android:inputType="number"
-        android:textSize="34sp" />
+        <EditText
+            android:id="@+id/editTextRegisterEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
 
-    <Button
-        android:id="@+id/buttonRegisterApply"
+        <EditText
+            android:id="@+id/editTextRegisterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/editTextRegisterName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/editTextRegisterID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="ID"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Apply Register"
-        android:textSize="24sp" />
+        android:layout_weight="0.8"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonRegisterApply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:backgroundTint="@color/transparent"
+            android:foreground="@drawable/buttonneon2"
+            android:text="Apply Register"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
 </LinearLayout>
