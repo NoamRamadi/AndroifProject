@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -19,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,13 +41,14 @@ public class FragmentLogin extends Fragment {
     Button searchBtnName;
     Button searchBtnGenre;
     Button searchBtnCompany;
-    EditText searchTxt ;
+    EditText searchTxt;
+    TextView helloUser;
     Bundle bundle;
-    String str;
+    String str,username,emailToLookFor;
     Hashtable<String,Integer> drawableHashTable ;
-    Integer[] drawableArray = {R.drawable.callofduty, R.drawable.gta, R.drawable.leagueoflegend};
-    private ArrayList<GameData> dataSet;
-    private ArrayList<Person> usersDB;
+    //Integer[] drawableArray = {R.drawable.callofduty, R.drawable.gta, R.drawable.leagueoflegend};
+    public ArrayList<GameData> dataSet;
+    public ArrayList<Person> usersArray;
 
     public FragmentLogin() {
         // Required empty public constructor
@@ -83,6 +87,7 @@ public class FragmentLogin extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
         dataSet = new ArrayList<GameData>();
+        usersArray = new ArrayList<Person>();
         drawableHashTable = new Hashtable<String,Integer>();
         drawableHashTable.put("Call Of Duty",R.drawable.callofduty);
         drawableHashTable.put("Call Of Duty Modern Warfare",R.drawable.callofdutymw);
@@ -92,6 +97,9 @@ public class FragmentLogin extends Fragment {
         drawableHashTable.put("Call Of Duty Black Ops 3",R.drawable.callofduty3);
         drawableHashTable.put("League Of Legend",R.drawable.leagueoflegend);
         drawableHashTable.put("Grand Theft Auto",R.drawable.gta);
+        emailToLookFor=getArguments().getString("email");
+        emailToLookFor=emailToLookFor.replace(".","");
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("games");
         ref.addListenerForSingleValueEvent(
@@ -107,6 +115,44 @@ public class FragmentLogin extends Fragment {
                         //handle databaseError
                     }
                 });
+        DatabaseReference  ref2 = FirebaseDatabase.getInstance().getReference().child("users");
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                collectAllUsersDataFromDB((Map<String,Object>) snapshot.getValue(),emailToLookFor);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        ref2.addListenerForSingleValueEvent(eventListener);
+
+
+
+
+
+
+
+
+
+
+
+//        ref2.addListenerForSingleValueEvent(
+//                new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        //Get map of users in datasnapshot
+//                        collectAllUsersDataFromDB((Map<String,Object>) dataSnapshot.getValue());
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        //handle databaseError
+//                    }
+//                });
 
 
 
@@ -114,6 +160,19 @@ public class FragmentLogin extends Fragment {
         searchBtnGenre = view.findViewById(R.id.LoggedInPageSearchGenreButton);
         searchBtnCompany = view.findViewById(R.id.LoggedInPageSearchCompanyButton);
         searchTxt = view.findViewById(R.id.LoggedInPageSearchText);
+
+
+        helloUser =view.findViewById(R.id.LoggedInPageSearchUserName);
+
+
+        /*for(Person person: this.usersArray)
+        {
+            String benzona=person.getEmail();
+            benzona=benzona.replace(".","");
+            if(benzona.equals(emailToLookFor))
+                username=person.getName();
+        }*/
+        //helloUser.setText("Hello "+ username);
         str="";
 
 
@@ -158,10 +217,10 @@ public class FragmentLogin extends Fragment {
 
             }
         });
-    return view;
+        return view;
     }
-    private void collectAllDataFromDB(Map<String,Object> users) {
-          //iterate through each user, ignoring their UID
+    public void collectAllDataFromDB(Map<String,Object> users) {
+        //iterate through each user, ignoring their UID
 
         for (Map.Entry<String, Object> entry : users.entrySet()){
 
@@ -171,8 +230,25 @@ public class FragmentLogin extends Fragment {
             dataSet.add(new GameData(singleUser.get("name").toString(),singleUser.get("company").toString(),
                     singleUser.get("description").toString(),
                     singleUser.get("genre").toString(),singleUser.get("rate").toString(),drawableHashTable.get(key)
-                    ));
+            ));
         }
+
+    }
+    public void collectAllUsersDataFromDB(Map<String,Object> users,String mail) {
+        //iterate through each user, ignoring their UID
+        for (Map.Entry<String, Object> entry : users.entrySet()){
+
+            //Get user map
+            Map singleUser = (Map) entry.getValue();
+            usersArray.add(new Person(singleUser.get("email").toString(),singleUser.get("password").toString(),
+                    singleUser.get("name").toString(),
+                    singleUser.get("ID").toString()
+            ));
+            if((mail.replace(".","")).equals(emailToLookFor))
+                username=singleUser.get("name").toString();
+
+        }
+        helloUser.setText("Hello "+ username);
 
     }
 

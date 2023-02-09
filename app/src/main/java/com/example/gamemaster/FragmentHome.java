@@ -38,8 +38,8 @@ public class FragmentHome extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Bundle bundle = new Bundle();
-    String loginID ;
+    Bundle bundle;
+    String loginID,email,password;
     private FirebaseAuth mAuth;
     private EditText emailText;
     private EditText passwordText;
@@ -79,6 +79,8 @@ public class FragmentHome extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        email="";
+        password="";
 
 
         emailText = view.findViewById(R.id.editTextEmail);
@@ -86,7 +88,7 @@ public class FragmentHome extends Fragment {
         Button buttonLogin = view.findViewById(R.id.buttonHomeLogin);
 
         Button buttonRegister = view.findViewById(R.id.buttonHomeRegister);
-      //  mAuth = FirebaseAuth.getInstance();
+        //  mAuth = FirebaseAuth.getInstance();
 
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -147,11 +149,11 @@ public class FragmentHome extends Fragment {
     }
 
     public void funcLogin(View view) {
-       // Toast.makeText(getContext(), "login zi", Toast.LENGTH_LONG).show();
+        // Toast.makeText(getContext(), "login zi", Toast.LENGTH_LONG).show();
 
 
-        String email = emailText.getText().toString().trim();
-        String password = passwordText.getText().toString().trim();
+        email = emailText.getText().toString().trim();
+        password = passwordText.getText().toString().trim();
 
         if (email.equals("") || password.equals("")) {
             email = "none";
@@ -165,8 +167,10 @@ public class FragmentHome extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                           // Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentLogin , bundle);
-                            Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentLogin );
+                            // Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentLogin , bundle);
+                            bundle=new Bundle();
+                            bundle.putString("email",email);
+                            Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentLogin,bundle);
 
 
                         } else {

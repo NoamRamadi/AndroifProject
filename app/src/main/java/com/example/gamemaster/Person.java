@@ -13,5 +13,15 @@ public class Person {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+
+
+    public String getEmail() {
+        return email;
+    }
+
     public Person(){}
 }
