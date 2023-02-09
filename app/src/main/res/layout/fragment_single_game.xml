@@ -52,7 +52,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageViewChosenHero"
+                android:id="@+id/imageViewChosenGame"
                 android:layout_width="match_parent"
                 android:layout_height="221dp"
                 android:layout_margin="10dp"
@@ -67,7 +67,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/TextViewChosenHeroDetail"
+            android:id="@+id/TextViewChosenGameDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -89,7 +89,7 @@
             android:layout_margin="10dp"
             android:layout_weight="0.9"
             android:autoLink="all"
-            android:text="@string/about_link" />
+            android:text="yotube" />
     </LinearLayout>
 
 </LinearLayout>

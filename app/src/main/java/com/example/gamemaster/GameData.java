@@ -7,15 +7,17 @@ public class GameData {
     public String rate;
     public String company;
     public int image;
+    public String releaseDate;
 
 
-    public GameData(String name,String company, String description, String genre, String rate,int image) {
+    public GameData(String name,String company, String description, String genre, String rate,int image ,String releaseDate) {
         this.name = name;
         this.company=company;
         this.description = description;
         this.genre = genre;
         this.rate = rate;
         this.image = image;
+        this.releaseDate = releaseDate;
     }
 
     public String getName() {
@@ -24,6 +26,10 @@ public class GameData {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
     public GameData(){}

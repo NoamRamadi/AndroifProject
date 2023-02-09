@@ -95,18 +95,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                @Override
                public void onClick(View view) {
 
-                   String check=textViewName.getText().toString();
+                   String clickedGameName=textViewName.getText().toString();
 
 
                     Bundle bundle = new Bundle();
 
                   for(GameData gm: dataSet) {
                       {
-                          if(gm.getName().equals(check))
+                          if(gm.getName().equals(clickedGameName))
                           {
                               bundle.putString("description",gm.getDescription());
-                              bundle.putString("name",  check);
+                              bundle.putString("name",  clickedGameName);
                               bundle.putInt("image",  gm.getImage());
+                              bundle.putString("company",gm.getCompany());
+                              bundle.putString("released",gm.getReleaseDate());
 
                           }
                       }
@@ -132,6 +134,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             dataSet.add(new GameData(singleUser.get("name").toString(), singleUser.get("company").toString(),
                     singleUser.get("description").toString(),
                     singleUser.get("genre").toString(), singleUser.get("rate").toString(), drawableHashTable.get(key)
+                    ,singleUser.get("released").toString()
             ));
         }
     }

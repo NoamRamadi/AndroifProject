@@ -230,6 +230,7 @@ public class FragmentLogin extends Fragment {
             dataSet.add(new GameData(singleUser.get("name").toString(),singleUser.get("company").toString(),
                     singleUser.get("description").toString(),
                     singleUser.get("genre").toString(),singleUser.get("rate").toString(),drawableHashTable.get(key)
+                    ,singleUser.get("released").toString()
             ));
         }
 

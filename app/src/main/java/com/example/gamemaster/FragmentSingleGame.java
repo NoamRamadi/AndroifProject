@@ -62,13 +62,19 @@ public class FragmentSingleGame extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_single_game, container, false);
-        TextView heroDetail = view.findViewById(R.id.TextViewChosenHeroDetail);
-
-        ImageView heroImage = view.findViewById(R.id.imageViewChosenHero);
+        TextView gameDescription = view.findViewById(R.id.TextViewChosenGameDescription);
+        TextView gameName = view.findViewById(R.id.textViewGameName);
+        TextView releaseDate = view.findViewById(R.id.textViewGameDate);
+        TextView company = view.findViewById(R.id.textViewGameCompany);
+        ImageView gameImage = view.findViewById(R.id.imageViewChosenGame);
 
        // heroDetail.setText(getArguments().getString("name"));
-        heroDetail.setText(getArguments().getString("description"));
-        heroImage.setImageResource(getArguments().getInt("image"));
+        gameDescription.setText(getArguments().getString("description"));
+        gameImage.setImageResource(getArguments().getInt("image"));
+        gameName.setText(getArguments().getString("name"));
+        releaseDate.setText(getArguments().getString("released"));
+        company.setText(getArguments().getString("company"));
+
         return view;
     }
 }
