@@ -34,6 +34,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.dataSet = dataSet;
         drawableHashTable = new Hashtable<String,Integer>();
         drawableHashTable.put("Call Of Duty",R.drawable.callofduty);
+        drawableHashTable.put("Call Of Duty Modern Warfare",R.drawable.callofdutymw);
+        drawableHashTable.put("Call Of Duty Modern Warfare 2",R.drawable.callofdutymw2);
+        drawableHashTable.put("Call Of Duty Black Ops",R.drawable.callofdutyblackops);
+        drawableHashTable.put("Call Of Duty Black Ops 2",R.drawable.callofduty2);
+        drawableHashTable.put("Call Of Duty Black Ops 3",R.drawable.callofduty3);
         drawableHashTable.put("League Of Legend",R.drawable.leagueoflegend);
         drawableHashTable.put("Grand Theft Auto",R.drawable.gta);
     }
