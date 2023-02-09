@@ -151,6 +151,7 @@ public class FragmentRegister extends Fragment {
        // myRef = database.getReference("users").child(p.ID);
    //     myRef.setValue(p);
         //myRef.child("users").setValue(p);
-        myRef.child("users").child(p.ID).setValue(p);
+        String modifiedEmail = p.email.replace(".","");
+        myRef.child("users").child(modifiedEmail).setValue(p);
     }
 }

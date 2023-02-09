@@ -44,6 +44,8 @@ public class FragmentLogin extends Fragment {
     Hashtable<String,Integer> drawableHashTable ;
     Integer[] drawableArray = {R.drawable.callofduty, R.drawable.gta, R.drawable.leagueoflegend};
     private ArrayList<GameData> dataSet;
+    private ArrayList<Person> usersDB;
+
     public FragmentLogin() {
         // Required empty public constructor
     }
