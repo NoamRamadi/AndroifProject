@@ -48,9 +48,6 @@ public class GameData {
         return genre;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public int getImage() {
         return image;

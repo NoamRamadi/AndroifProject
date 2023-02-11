@@ -68,7 +68,7 @@ public class FragmentSingleGame extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_single_game, container, false);
         TextView gameDescription = view.findViewById(R.id.TextViewChosenGameDescription);
         TextView gameName = view.findViewById(R.id.textViewGameName);
@@ -76,7 +76,7 @@ public class FragmentSingleGame extends Fragment{
         TextView company = view.findViewById(R.id.textViewGameCompany);
         ImageView gameImage = view.findViewById(R.id.imageViewChosenGame);
 
-       // heroDetail.setText(getArguments().getString("name"));
+
         gameDescription.setText(getArguments().getString("description"));
         gameImage.setImageResource(getArguments().getInt("image"));
         gameName.setText(getArguments().getString("name"));
@@ -84,57 +84,9 @@ public class FragmentSingleGame extends Fragment{
         company.setText(getArguments().getString("company"));
 
 
-        /*TextView textView = view.findViewById(R.id.tee);
-        String dynamicUrl = "http://www.google.com"; // or whatever you want, it's dynamic
-
-        String linkedText = "<b>text3:</b>  Text with a " +
-                String.format("<a href=\"%s\">link</a> ", dynamicUrl) +
-                "created in the Java source code using HTML.";
-
-        textView.setText(Html.fromHtml(linkedText));
-        textView.setMovementMethod(LinkMovementMethod.getInstance());*/
-        // on below line we are creating variables.
-
         VideoView videoView;
-        /*
-        // Your Video URL
-        String videoUrl = "https://www.youtube.com/watch?v=ibSQrQ2pLC0";
-        super.onCreate(savedInstanceState);
 
 
-        // on below line we are initializing our variables.
-        videoView = view.findViewById(R.id.videoView);
-
-        // Uri object to refer the
-        // resource from the videoUrl
-        Uri uri = Uri.parse(videoUrl);
-
-        // sets the resource from the
-        // videoUrl to the videoView
-        videoView.setVideoURI(uri);
-
-        // creating object of
-        // media controller class
-
-        MediaController mediaController = new MediaController(this.getActivity());
-
-        // sets the anchor view
-        // anchor view for the videoView
-        mediaController.setAnchorView(videoView);
-
-        // sets the media player to the videoView
-        mediaController.setMediaPlayer(videoView);
-
-        // sets the media controller to the videoView
-        videoView.setMediaController(mediaController);
-
-        // starts the video
-        videoView.start();
-        */
-
-
-
-        //super.onCreate(savedInstanceState);
         int videoLocation ;
         videoLocation=(getArguments().getInt("video"));
         String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + videoLocation;
@@ -144,7 +96,7 @@ public class FragmentSingleGame extends Fragment{
         videoView.setMediaController(new MediaController(this.getActivity()));
         videoView.setVideoURI(uri);
         videoView.requestFocus();
-        //videoView.start();
+
 
 
 

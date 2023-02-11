@@ -87,7 +87,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
        CardView cardView;
        TextView textViewName;
        TextView textViewCompany;
-       TextView textViewData;
        ImageView imageViewIcon;
 
 
@@ -99,11 +98,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
            textViewName = ( TextView) itemView.findViewById(R.id.textViewName);
            textViewCompany = ( TextView) itemView.findViewById(R.id.textViewCompany);
            imageViewIcon = (ImageView) itemView.findViewById(R.id.imageViewHero);
-           //textViewData= ()
-
-
-
-
 
            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("games");
            ref.addListenerForSingleValueEvent(
@@ -121,14 +115,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    });
 
 
-
-
-           //ImageView textName = imageViewIcon.get
-           String textDetail = textViewCompany.getText().toString();
-
-           //Bundle bundle = new Bundle();
-           //bundle.putString("Name", textName);
-           //bundle.putString("Detail", textDetail);
 
 
            cardView.setOnClickListener(new View.OnClickListener() {
@@ -154,8 +140,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                           }
                       }
                   }
-
-                   //bundle.putString("Image",  MyData.drawableArray[i]);
 
                    Navigation.findNavController(view).navigate(R.id.action_fragmentSearchResult_to_fragmentSingleGame2,bundle);
                }

@@ -43,7 +43,6 @@ public class FragmentRegister extends Fragment {
     private EditText IDText;
     private EditText nameText;
     DatabaseReference myRef;
-    FirebaseDatabase database;
 
     public FragmentRegister() {
         // Required empty public constructor
@@ -83,7 +82,6 @@ public class FragmentRegister extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_register, container, false);
         mAuth = FirebaseAuth.getInstance();
-        //database=FirebaseDatabase.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference();
 
 
@@ -148,9 +146,6 @@ public class FragmentRegister extends Fragment {
 
 
         Person p = new Person(email ,password , name , ID);
-       // myRef = database.getReference("users").child(p.ID);
-   //     myRef.setValue(p);
-        //myRef.child("users").setValue(p);
         String modifiedEmail = p.email.replace(".","");
         myRef.child("users").child(modifiedEmail).setValue(p);
     }

@@ -140,24 +140,4 @@ public class FragmentSearchResult extends Fragment implements Serializable {
         return view;
     }
 
-    public void readDatabaseByName(String name) {
-        // Read from the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("games").child(name);
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                GameData value = dataSnapshot.getValue(GameData.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-    }
 }

@@ -39,7 +39,7 @@ public class FragmentHome extends Fragment {
     private String mParam1;
     private String mParam2;
     Bundle bundle;
-    String loginID,email,password;
+    String email,password;
     private FirebaseAuth mAuth;
     private EditText emailText;
     private EditText passwordText;
@@ -88,20 +88,12 @@ public class FragmentHome extends Fragment {
         Button buttonLogin = view.findViewById(R.id.buttonHomeLogin);
 
         Button buttonRegister = view.findViewById(R.id.buttonHomeRegister);
-        //  mAuth = FirebaseAuth.getInstance();
+
 
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentLogin);
-
-                //String email = emailText.getText().toString().trim();
-
-                //readDBID(email);
-
-                //bundle.putString("ID",loginID);
-                //mAuth = FirebaseAuth.getInstance();
                 funcLogin(view);
             }
         });
@@ -109,15 +101,7 @@ public class FragmentHome extends Fragment {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //String emailTxt = editTextEmail.getText().toString();
-                //String passwordTxt = editTextPassword.getText().toString();
-
-                //Bundle bundle = new Bundle();
-                //bundle.putString("Email", emailTxt);
-                //bundle.putString("Password", passwordTxt);
                 Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentRegister);
-                //Navigation.findNavController(view).navigate(R.id.action_fragmentHome_to_fragmentRegister , bundle);
             }
         });
 
@@ -125,32 +109,8 @@ public class FragmentHome extends Fragment {
     return view;
     }
 
-    public void readDBID(String email) {
-        // Read from the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users").child(email);
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Person value = dataSnapshot.getValue(Person.class);
-
-                loginID = value.ID;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-    }
 
     public void funcLogin(View view) {
-        // Toast.makeText(getContext(), "login zi", Toast.LENGTH_LONG).show();
-
 
         email = emailText.getText().toString().trim();
         password = passwordText.getText().toString().trim();

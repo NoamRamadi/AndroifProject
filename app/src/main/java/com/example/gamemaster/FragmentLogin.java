@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,10 +43,9 @@ public class FragmentLogin extends Fragment {
     EditText searchTxt;
     TextView helloUser;
     Bundle bundle;
-    String str,username,emailToLookFor;
+    String searchTxtStr,username,emailToLookFor;
     Hashtable<String,Integer> drawableHashTable ;
     Hashtable<String,Integer> videoHashTable ;
-    //Integer[] drawableArray = {R.drawable.callofduty, R.drawable.gta, R.drawable.leagueoflegend};
     public ArrayList<GameData> dataSet;
     public ArrayList<Person> usersArray;
 
@@ -98,7 +96,6 @@ public class FragmentLogin extends Fragment {
         drawableHashTable.put("Call Of Duty Black Ops 3",R.drawable.callofduty3);
         drawableHashTable.put("League Of Legends",R.drawable.leagueoflegends);
         drawableHashTable.put("Grand Theft Auto",R.drawable.gta);
-
         drawableHashTable.put("Dota",R.drawable.dota);
         drawableHashTable.put("Dota 2",R.drawable.dota2);
         drawableHashTable.put("Grand Theft Auto III",R.drawable.gta3);
@@ -122,7 +119,6 @@ public class FragmentLogin extends Fragment {
         videoHashTable.put("Call Of Duty Black Ops 3",R.raw.csgo);
         videoHashTable.put("League Of Legends",R.raw.leagueoflegends);
         videoHashTable.put("Grand Theft Auto",R.raw.gtasa);
-
         videoHashTable.put("Dota",R.raw.dota2);
         videoHashTable.put("Dota 2",R.raw.dota2);
         videoHashTable.put("Grand Theft Auto III",R.raw.gtasa);
@@ -172,31 +168,6 @@ public class FragmentLogin extends Fragment {
         ref2.addListenerForSingleValueEvent(eventListener);
 
 
-
-
-
-
-
-
-
-
-
-//        ref2.addListenerForSingleValueEvent(
-//                new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        //Get map of users in datasnapshot
-//                        collectAllUsersDataFromDB((Map<String,Object>) dataSnapshot.getValue());
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        //handle databaseError
-//                    }
-//                });
-
-
-
         searchBtnName = view.findViewById(R.id.LoggedInPageSearchButton);
         searchBtnGenre = view.findViewById(R.id.LoggedInPageSearchGenreButton);
         searchBtnCompany = view.findViewById(R.id.LoggedInPageSearchCompanyButton);
@@ -205,24 +176,15 @@ public class FragmentLogin extends Fragment {
 
         helloUser =view.findViewById(R.id.LoggedInPageSearchUserName);
 
-
-        /*for(Person person: this.usersArray)
-        {
-            String benzona=person.getEmail();
-            benzona=benzona.replace(".","");
-            if(benzona.equals(emailToLookFor))
-                username=person.getName();
-        }*/
-        //helloUser.setText("Hello "+ username);
-        str="";
+        searchTxtStr ="";
 
 
         searchBtnName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                str = searchTxt.getText().toString().trim();
+                searchTxtStr = searchTxt.getText().toString().trim();
                 bundle = new Bundle();
-                bundle.putString("searchedText",str);
+                bundle.putString("searchedText", searchTxtStr);
                 bundle.putString("searchedFlag","gameName");
                 bundle.putSerializable("arr",dataSet);
 
@@ -234,9 +196,9 @@ public class FragmentLogin extends Fragment {
         searchBtnGenre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                str = searchTxt.getText().toString().trim();
+                searchTxtStr = searchTxt.getText().toString().trim();
                 bundle = new Bundle();
-                bundle.putString("searchedText",str);
+                bundle.putString("searchedText", searchTxtStr);
                 bundle.putString("searchedFlag","gameGenre");
                 bundle.putSerializable("arr",dataSet);
 
@@ -248,9 +210,9 @@ public class FragmentLogin extends Fragment {
         searchBtnCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                str = searchTxt.getText().toString().trim();
+                searchTxtStr = searchTxt.getText().toString().trim();
                 bundle = new Bundle();
-                bundle.putString("searchedText",str);
+                bundle.putString("searchedText", searchTxtStr);
                 bundle.putString("searchedFlag","gameCompany");
                 bundle.putSerializable("arr",dataSet);
 
@@ -286,32 +248,13 @@ public class FragmentLogin extends Fragment {
                     singleUser.get("name").toString(),
                     singleUser.get("ID").toString()
             ));
-            if((mail.replace(".","")).equals(emailToLookFor))
+            mail = singleUser.get("email").toString();
+            String email = (mail.replace(".",""));
+            if(email.equals(emailToLookFor))
                 username=singleUser.get("name").toString();
 
         }
         helloUser.setText("Hello "+ username);
 
-    }
-
-    public void readDatabase(String name) {
-        // Read from the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("games");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                GameData value = dataSnapshot.getValue(GameData.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
     }
 }
