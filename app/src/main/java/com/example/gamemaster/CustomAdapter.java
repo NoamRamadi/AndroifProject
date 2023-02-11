@@ -39,8 +39,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         drawableHashTable.put("Call Of Duty Black Ops",R.drawable.callofdutyblackops);
         drawableHashTable.put("Call Of Duty Black Ops 2",R.drawable.callofduty2);
         drawableHashTable.put("Call Of Duty Black Ops 3",R.drawable.callofduty3);
-        drawableHashTable.put("League Of Legend",R.drawable.leagueoflegend);
+        drawableHashTable.put("League Of Legends",R.drawable.leagueoflegends);
         drawableHashTable.put("Grand Theft Auto",R.drawable.gta);
+
+        drawableHashTable.put("Dota",R.drawable.dota);
+        drawableHashTable.put("Dota 2",R.drawable.dota2);
+        drawableHashTable.put("Grand Theft Auto III",R.drawable.gta3);
+        drawableHashTable.put("Grand Theft Auto IV",R.drawable.gta4);
+        drawableHashTable.put("Grand Theft Auto V",R.drawable.gta5);
+        drawableHashTable.put("Grand Theft Auto San Andreas",R.drawable.gtasa);
+        drawableHashTable.put("Grand Theft Auto Vice City",R.drawable.gtavc);
+        drawableHashTable.put("Need For Speed II",R.drawable.needforspeed2);
+        drawableHashTable.put("Need For Speed III",R.drawable.needforspeed3);
+        drawableHashTable.put("Need For Speed",R.drawable.nfs);
+        drawableHashTable.put("Portal",R.drawable.portal);
+        drawableHashTable.put("Portal 2",R.drawable.portal2);
+        drawableHashTable.put("The Sims",R.drawable.sims);
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder  {
