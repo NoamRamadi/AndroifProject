@@ -1,21 +1,29 @@
 package com.example.gamemaster;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
+
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentSingleGame#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentSingleGame extends Fragment {
+public class FragmentSingleGame extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,6 +83,73 @@ public class FragmentSingleGame extends Fragment {
         releaseDate.setText(getArguments().getString("released"));
         company.setText(getArguments().getString("company"));
 
+
+        /*TextView textView = view.findViewById(R.id.tee);
+        String dynamicUrl = "http://www.google.com"; // or whatever you want, it's dynamic
+
+        String linkedText = "<b>text3:</b>  Text with a " +
+                String.format("<a href=\"%s\">link</a> ", dynamicUrl) +
+                "created in the Java source code using HTML.";
+
+        textView.setText(Html.fromHtml(linkedText));
+        textView.setMovementMethod(LinkMovementMethod.getInstance());*/
+        // on below line we are creating variables.
+
+        VideoView videoView;
+        /*
+        // Your Video URL
+        String videoUrl = "https://www.youtube.com/watch?v=ibSQrQ2pLC0";
+        super.onCreate(savedInstanceState);
+
+
+        // on below line we are initializing our variables.
+        videoView = view.findViewById(R.id.videoView);
+
+        // Uri object to refer the
+        // resource from the videoUrl
+        Uri uri = Uri.parse(videoUrl);
+
+        // sets the resource from the
+        // videoUrl to the videoView
+        videoView.setVideoURI(uri);
+
+        // creating object of
+        // media controller class
+
+        MediaController mediaController = new MediaController(this.getActivity());
+
+        // sets the anchor view
+        // anchor view for the videoView
+        mediaController.setAnchorView(videoView);
+
+        // sets the media player to the videoView
+        mediaController.setMediaPlayer(videoView);
+
+        // sets the media controller to the videoView
+        videoView.setMediaController(mediaController);
+
+        // starts the video
+        videoView.start();
+        */
+
+
+
+        //super.onCreate(savedInstanceState);
+        int videoLocation ;
+        videoLocation=(getArguments().getInt("video"));
+        String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + videoLocation;
+        videoView = view.findViewById(R.id.videoView);
+
+        Uri uri = Uri.parse(videoPath);
+        videoView.setMediaController(new MediaController(this.getActivity()));
+        videoView.setVideoURI(uri);
+        videoView.requestFocus();
+        //videoView.start();
+
+
+
         return view;
     }
+
+
 }

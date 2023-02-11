@@ -46,6 +46,7 @@ public class FragmentLogin extends Fragment {
     Bundle bundle;
     String str,username,emailToLookFor;
     Hashtable<String,Integer> drawableHashTable ;
+    Hashtable<String,Integer> videoHashTable ;
     //Integer[] drawableArray = {R.drawable.callofduty, R.drawable.gta, R.drawable.leagueoflegend};
     public ArrayList<GameData> dataSet;
     public ArrayList<Person> usersArray;
@@ -111,6 +112,32 @@ public class FragmentLogin extends Fragment {
         drawableHashTable.put("Portal",R.drawable.portal);
         drawableHashTable.put("Portal 2",R.drawable.portal2);
         drawableHashTable.put("The Sims",R.drawable.sims);
+
+        videoHashTable = new Hashtable<String,Integer>();
+        videoHashTable.put("Call Of Duty",R.raw.csgo);
+        videoHashTable.put("Call Of Duty Modern Warfare",R.raw.csgo);
+        videoHashTable.put("Call Of Duty Modern Warfare 2",R.raw.csgo);
+        videoHashTable.put("Call Of Duty Black Ops",R.raw.csgo);
+        videoHashTable.put("Call Of Duty Black Ops 2",R.raw.csgo);
+        videoHashTable.put("Call Of Duty Black Ops 3",R.raw.csgo);
+        videoHashTable.put("League Of Legends",R.raw.leagueoflegends);
+        videoHashTable.put("Grand Theft Auto",R.raw.gtasa);
+
+        videoHashTable.put("Dota",R.raw.dota2);
+        videoHashTable.put("Dota 2",R.raw.dota2);
+        videoHashTable.put("Grand Theft Auto III",R.raw.gtasa);
+        videoHashTable.put("Grand Theft Auto IV",R.raw.gtasa);
+        videoHashTable.put("Grand Theft Auto V",R.raw.gtav);
+        videoHashTable.put("Grand Theft Auto San Andreas",R.raw.gtasa);
+        videoHashTable.put("Grand Theft Auto Vice City",R.raw.gtasa);
+        videoHashTable.put("Need For Speed II",R.raw.nfs);
+        videoHashTable.put("Need For Speed III",R.raw.nfs);
+        videoHashTable.put("Need For Speed",R.raw.nfs);
+        videoHashTable.put("Portal",R.raw.portal2);
+        videoHashTable.put("Portal 2",R.raw.portal2);
+        videoHashTable.put("The Sims",R.raw.sims);
+
+
         emailToLookFor=getArguments().getString("email");
         emailToLookFor=emailToLookFor.replace(".","");
 
@@ -244,7 +271,7 @@ public class FragmentLogin extends Fragment {
             dataSet.add(new GameData(singleUser.get("name").toString(),singleUser.get("company").toString(),
                     singleUser.get("description").toString(),
                     singleUser.get("genre").toString(),singleUser.get("rate").toString(),drawableHashTable.get(key)
-                    ,singleUser.get("released").toString()
+                    ,singleUser.get("released").toString(),videoHashTable.get(key)
             ));
         }
 

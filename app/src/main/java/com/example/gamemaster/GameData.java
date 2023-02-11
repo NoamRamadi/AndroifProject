@@ -8,9 +8,14 @@ public class GameData {
     public String company;
     public int image;
     public String releaseDate;
+    public int video ;
 
 
-    public GameData(String name,String company, String description, String genre, String rate,int image ,String releaseDate) {
+    public int getVideo() {
+        return video;
+    }
+
+    public GameData(String name, String company, String description, String genre, String rate, int image , String releaseDate , int video) {
         this.name = name;
         this.company=company;
         this.description = description;
@@ -18,6 +23,7 @@ public class GameData {
         this.rate = rate;
         this.image = image;
         this.releaseDate = releaseDate;
+        this.video = video;
     }
 
     public String getName() {
