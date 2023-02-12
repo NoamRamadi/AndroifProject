@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">אשף המשחק</string>
+    <string name="text" translatable="false">שלום</string>
+    <string name="Search_Name" translatable="false">חפש שם</string>
+    <string name="Search_Genre" translatable="false">חפש ז\'אנר</string>
+    <string name="Search_Company" translatable="false">חפש חברה</string>
+    <string name="Login">התחבר</string>
+    <string name="Register">הירשם</string>
+    <string name="Apply_Register">בצע הרשמה</string>
+</resources>

@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:layout_weight="0.2"
-            android:text=""
+
+            android:text="@string/text"
             android:textSize="20dp" />
 
         <EditText
@@ -59,7 +60,7 @@
             android:layout_weight="0.2"
             android:backgroundTint="@color/transparent"
             android:foreground="@drawable/buttonneon2"
-            android:text="Search Name"
+            android:text="@string/Search_Name"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -72,8 +73,7 @@
             android:layout_weight="0.2"
             android:backgroundTint="@color/transparent"
             android:foreground="@drawable/buttonneon2"
-            android:text="Search Genre"
-
+            android:text="@string/Search_Genre"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -86,7 +86,7 @@
             android:layout_weight="0.2"
             android:backgroundTint="@color/transparent"
             android:foreground="@drawable/buttonneon2"
-            android:text="Search Company"
+            android:text="@string/Search_Company"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />

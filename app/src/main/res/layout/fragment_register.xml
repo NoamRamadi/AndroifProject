@@ -91,7 +91,7 @@
             android:layout_margin="15dp"
             android:backgroundTint="@color/transparent"
             android:foreground="@drawable/buttonneon2"
-            android:text="Apply Register"
+            android:text="@string/Apply_Register"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />

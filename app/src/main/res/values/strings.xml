@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">GameMaster</string>
+    <string name="app_name" translatable="false">GameMaster</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_youtube">YoutubeActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -11,4 +11,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="text" translatable="false">Hello</string>
+    <string name="Search_Name">Search Name</string>
+    <string name="Search_Genre" translatable="false">Search Genre</string>
+    <string name="Search_Company" translatable="false">Search Company</string>
+    <string name="Login" translatable="false">Login</string>
+    <string name="Register">Register</string>
+    <string name="Apply_Register">Apply Register</string>
 </resources>
